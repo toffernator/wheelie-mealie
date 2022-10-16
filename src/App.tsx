@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './spoonacular/api'
+import ApiReqButton from './components/ApiReqButton';
+import { NutritionData } from './spoonacular/api';
+import DishList from './components/DishList';
+import { useState } from 'react';
+
+// Dummy data
+
+const Bread: NutritionData = {
+  dish: "Bread",
+  calories: { value: 430, unit: "calories" },
+  carbs: { value: 53, unit: "g" },
+  fat: { value: 12, unit: "g" },
+  protein: { value: 13, unit: "g" },
+}
+
+
 
 function App() {
+  let [meals, setMeals] = useState<Array<NutritionData>>([Bread])
+
+  function handleSubmit(data: NutritionData) {
+    let newMeals = [...meals, data]
+    setMeals(newMeals)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container mx-auto">
+      <ApiReqButton className="" OnSubmit={handleSubmit} Name="Dish" />
+      <DishList className="" Dishes={meals} />
     </div>
   );
 }
