@@ -26,8 +26,8 @@ export default function ApiReqButton(props: Props & React.HTMLAttributes<HTMLDiv
   return (
     <>
       <input className="border-2 rounded-xl" type="text" name={props.Name} value={data} onChange={(e) => setData(e.target.value)} />
-      <PrimaryButton text="Add" onClick={() => handleSubmit(data)} />
-      <PrimaryButton text="Add Bread" onClick={() => props.OnSubmit(bread)} />
+      <PrimaryButton onClick={() => handleSubmit(data)}><i className="bi bi-plus-lg"></i></PrimaryButton>
+      <PrimaryButton onClick={() => props.OnSubmit(bread)}>Add Bread</PrimaryButton>
     </>
   )
 }
