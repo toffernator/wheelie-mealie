@@ -8,7 +8,15 @@ interface Props {
 
 export default function ApiReqButton(props: Props & React.HTMLAttributes<HTMLDivElement>) {
   async function handleSubmit(dish: string) {
-    const data: NutritionData = await FetchNutritionalDataByDish(dish)
+    // const data: NutritionData = await FetchNutritionalDataByDish(dish)
+
+    const data: NutritionData = {
+      dish: "Bread",
+      calories: { value: 430, unit: "calories" },
+      carbs: { value: 53, unit: "g" },
+      fat: { value: 12, unit: "g" },
+      protein: { value: 13, unit: "g" },
+    }
     props.OnSubmit(data)
   }
 
