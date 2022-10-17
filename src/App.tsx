@@ -1,8 +1,8 @@
 import './spoonacular/api'
 import ApiReqButton from './components/ApiReqButton';
 import { NutritionData } from './spoonacular/api';
-import DishList from './components/DishList';
 import { useState } from 'react';
+import DishList from './components/DishList';
 
 // Dummy data
 
@@ -14,29 +14,24 @@ const Bread: NutritionData = {
   protein: { value: 13, unit: "g" },
 }
 
-
-
 function App() {
   let [meals, setMeals] = useState<Array<NutritionData>>([Bread])
 
-  function handleSubmit(data: NutritionData) {
+  function handleAdd(data: NutritionData) {
     let newMeals = [...meals, data]
     setMeals(newMeals)
   }
 
-  function handleRemove(data: NutritionData) {
-    console.log("Remove!")
-    let toRemove: number = meals.findIndex((dish) => dish.dish === data.dish)
-    let newMeals: Array<NutritionData> = [...meals].slice(0, toRemove)
-    let secondHalf: Array<NutritionData> = [...meals].slice(toRemove, -1)
-    newMeals.push(...secondHalf)
+  function handleRemove(index: number) {
+    console.log("Removing ", index)
+    let newMeals = [...meals].splice(index, 1)
     setMeals(newMeals)
   }
 
   return (
-    <div className="App container mx-auto">
-      <ApiReqButton className="" OnSubmit={handleSubmit} Name="Dish" />
-      <DishList className="" Dishes={meals} OnCardRemove={handleRemove} />
+    <div className="App md:container md:mx-auto">
+      <ApiReqButton className="" OnSubmit={handleAdd} Name="Dish" />
+      <DishList className="" Items={meals} OnRemove={handleRemove} />
     </div>
   );
 }
