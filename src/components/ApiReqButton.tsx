@@ -24,10 +24,10 @@ export default function ApiReqButton(props: Props & React.HTMLAttributes<HTMLDiv
   let [data, setData] = useState("")
 
   return (
-    <>
-      <input className="border-2 rounded-xl" type="text" name={props.Name} value={data} onChange={(e) => setData(e.target.value)} />
+    <div className="flex flex-row justify-center items-center">
+      <input className="w-4/5 border-2 rounded-xl" type="text" name={props.Name} value={data} onChange={(e) => setData(e.target.value)} />
       <PrimaryButton onClick={() => handleSubmit(data)}><i className="bi bi-plus-lg"></i></PrimaryButton>
-      <PrimaryButton onClick={() => props.OnSubmit(bread)}>Add Bread</PrimaryButton>
-    </>
+      {/* <PrimaryButton onClick={() => props.OnSubmit(bread)}>Add Bread</PrimaryButton> */}
+    </div>
   )
 }

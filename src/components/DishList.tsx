@@ -12,7 +12,7 @@ export default function DishList(props: Props & React.HTMLAttributes<HTMLDivElem
     return (
       <li className="flex flex-row justify-between" key={index}>
         <DishCard NutritionData={item} />
-        <DangerButton text={"remove"} onClick={() => props.OnRemove(index)} />
+        <DangerButton onClick={() => props.OnRemove(index)}><i className="bi bi-x-lg"></i></DangerButton>
       </li>
     )
   })

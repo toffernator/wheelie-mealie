@@ -1,6 +1,6 @@
 export interface Amount {
   unit: String,
-  value: Number,
+  value: number,
 }
 
 export interface NutritionData {
