@@ -1,0 +1,16 @@
+services:
+  site:
+    image: toffernator/meal-tracker:latest
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+      - "2015:2015"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:
