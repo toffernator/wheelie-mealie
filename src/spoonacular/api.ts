@@ -1,3 +1,5 @@
+let fetchedDishes: Record<string, NutritionData> = {}
+
 export interface Amount {
   unit: String,
   value: number,
@@ -27,7 +29,7 @@ function ReadApiKey(): string {
   return key;
 }
 
-export async function FetchNutritionalDataByDish(dish: string): Promise<NutritionData> {
+async function fetchNutritionalDataByDish(dish: string): Promise<NutritionData> {
   const opts: RequestInit = {
     method: "GET",
     redirect: "follow",
@@ -38,5 +40,22 @@ export async function FetchNutritionalDataByDish(dish: string): Promise<Nutritio
   const resp = await typedFetch<NutritionData>("https://api.spoonacular.com/recipes/guessNutrition?apiKey=" + ReadApiKey() + "&title=" + dish, opts)
   resp.dish = dish
   return resp
+}
+
+async function memoFetchNutritionalDataByDish(dish: string): Promise<NutritionData> {
+  if (localStorage.getItem(dish)) {
+    // || should never hit since the if statement guarantuees that the item is non-null
+    return JSON.parse(localStorage.getItem(dish) || "")
+  }
+
+  return fetchNutritionalDataByDish(dish)
+    .then((d) => {
+      localStorage.setItem(d.dish.toString(), JSON.stringify(d))
+      return d
+    })
+}
+
+export async function FetchNutritionalDataByDish(dish: string): Promise<NutritionData> {
+  return memoFetchNutritionalDataByDish(dish)
 }
 

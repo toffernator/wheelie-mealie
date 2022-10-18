@@ -31,9 +31,9 @@ function App() {
   }
 
   function handleRemove(index: number) {
-    console.log("Removing ", index)
-    let newMeals = [...meals].splice(index, 1)
-    setMeals(newMeals)
+    let firstHalf = [...meals].slice(0, index)
+    let secondHalf = [...meals].slice(index + 1, meals.length)
+    setMeals(firstHalf.concat(secondHalf))
   }
 
   useEffect(() => {
