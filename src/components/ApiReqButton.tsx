@@ -21,6 +21,7 @@ export default function ApiReqButton(props: Props & React.HTMLAttributes<HTMLDiv
     data.carbs.value = scaleByWeight(data.carbs.value, grams)
     data.protein.value = scaleByWeight(data.protein.value, grams)
     data.calories.value = scaleByWeight(data.calories.value, grams)
+    data.weight = { value: grams, unit: "grams" }
     props.OnSubmit(data)
   }
 
@@ -31,8 +32,8 @@ export default function ApiReqButton(props: Props & React.HTMLAttributes<HTMLDiv
 
   return (
     <div className="flex flex-row justify-center items-center">
-      <input className="w-4/5 border-2 rounded-xl" type="text" name="Dish" value={dish} onChange={(e) => setDish(e.target.value)} />
-      <input className="w-1/5 border-2 rounded-xl" type="number" name="Grams" value={gramsValue} onChange={(e) => setGrams(parseInt(e.target.value))} />
+      <input className="m-1 w-4/5 border-2 rounded-xl" type="text" name="Dish" value={dish} onChange={(e) => setDish(e.target.value)} />
+      <input className="m-1 w-1/5 border-2 rounded-xl" type="number" name="Grams" value={gramsValue} onChange={(e) => setGrams(parseInt(e.target.value))} />
       <PrimaryButton onClick={() => handleSubmit(dish)}><i className="bi bi-plus-lg"></i></PrimaryButton>
     </div>
   )

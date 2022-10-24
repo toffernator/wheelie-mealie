@@ -11,6 +11,7 @@ export interface NutritionData {
   protein: Amount,
   carbs: Amount,
   fat: Amount,
+  weight: Amount,
 }
 
 type FetchParams = Parameters<typeof fetch>;

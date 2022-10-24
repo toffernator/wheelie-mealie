@@ -44,9 +44,9 @@ function App() {
   }
 
   return (
-    <div className="App md:container md:mx-auto">
+    <div className="App container mx-auto p-2">
       <ApiReqButton className="" OnSubmit={handleAdd} />
-      <div className="border-2 rounded-lg flex flex-row justify-evenly justify-items-center items-center text-center place-items-center divide-x">
+      <div className="m-1 border-2 rounded-lg flex flex-row justify-evenly justify-items-center items-center text-center place-items-center divide-x">
         <p>F: {totalMacros.Fat}</p>
         <p>C: {totalMacros.Carbohydrates}</p>
         <p>P: {totalMacros.Protein}</p>
