@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { NutritionData, FetchNutritionalDataByDish } from '../spoonacular/api'
 import PrimaryButton from './PrimaryButton'
 
@@ -12,7 +12,8 @@ export default function ApiReqButton(props: Props & React.HTMLAttributes<HTMLDiv
     return parseFloat(scale.toFixed(1))
   }
 
-  async function handleSubmit(dish: string) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     if (dish === "" || dish === null) return
 
     const data: NutritionData = await FetchNutritionalDataByDish(dish)
@@ -31,10 +32,10 @@ export default function ApiReqButton(props: Props & React.HTMLAttributes<HTMLDiv
   const gramsValue = !grams && grams !== 0 ? '' : grams;
 
   return (
-    <div className="flex flex-row justify-center items-center">
+    <form className="flex flex-row justify-center items-center" onSubmit={handleSubmit}>
       <input className="m-1 w-4/5 border-2 rounded-xl" type="text" name="Dish" value={dish} onChange={(e) => setDish(e.target.value)} />
       <input className="m-1 w-1/5 border-2 rounded-xl" type="number" name="Grams" value={gramsValue} onChange={(e) => setGrams(parseInt(e.target.value))} />
-      <PrimaryButton onClick={() => handleSubmit(dish)}><i className="bi bi-plus-lg"></i></PrimaryButton>
-    </div>
+      <PrimaryButton><i className="bi bi-plus-lg"></i></PrimaryButton>
+    </form>
   )
 }
